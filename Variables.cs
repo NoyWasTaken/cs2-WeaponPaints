@@ -92,7 +92,7 @@ public partial class WeaponPaints
 	internal static Database? Database;
 
 	private static readonly MemoryFunctionVoid<nint, string, float> CAttributeListSetOrAddAttributeValueByName = new(GameData.GetSignature("CAttributeList_SetOrAddAttributeValueByName"));
-	
+
 	//we dont need anymore because we use AcceptInput
 	//private static readonly MemoryFunctionWithReturn<nint, string, int, int> SetBodygroupFunc = new(
 	//	GameData.GetSignature("CBaseModelEntity_SetBodygroup"));
@@ -163,9 +163,9 @@ public partial class WeaponPaints
 	private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
 	private readonly ConcurrentDictionary<int, ConcurrentDictionary<int, float>> _temporaryPlayerWeaponWear = new();
-	
+
 	internal static IMenuApi? MenuApi;
 	private static readonly PluginCapability<IMenuApi> MenuCapability = new("menu:nfcore");
-	
+
 	private int _fadeSeed;
 }

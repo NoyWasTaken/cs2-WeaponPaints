@@ -1,6 +1,6 @@
 ﻿using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Core.Translations;
-using CounterStrikeSharp.API.Modules.Menu;
+using CS2ScreenMenuAPI;
 using Dapper;
 using MenuManager;
 using Microsoft.Extensions.Logging;
@@ -126,7 +126,7 @@ namespace WeaponPaints
 				logger?.LogError("Not found \"skins.json\" file");
 			}
 		}
-		
+
 		internal static void LoadPinsFromFile(string filePath, ILogger logger)
 		{
 			var json = File.ReadAllText(filePath);
@@ -190,32 +190,13 @@ namespace WeaponPaints
 			Console.WriteLine("[WeaponPaints] " + message);
 			Console.ResetColor();
 		}
-		
-		internal static IMenu? CreateMenu(string title)
+
+		public static Menu CreateMenu(BasePlugin plugin, string title)
 		{
-			var menuType = WeaponPaints.Instance.Config.MenuType.ToLower();
-        
-			var menu = menuType switch
+			return new Menu(plugin)
 			{
-				_ when menuType.Equals("selectable", StringComparison.CurrentCultureIgnoreCase) =>
-					WeaponPaints.MenuApi?.NewMenu(title),
-
-				_ when menuType.Equals("dynamic", StringComparison.CurrentCultureIgnoreCase) =>
-					WeaponPaints.MenuApi?.NewMenuForcetype(title, MenuType.ButtonMenu),
-
-				_ when menuType.Equals("center", StringComparison.CurrentCultureIgnoreCase) =>
-					WeaponPaints.MenuApi?.NewMenuForcetype(title, MenuType.CenterMenu),
-
-				_ when menuType.Equals("chat", StringComparison.CurrentCultureIgnoreCase) =>
-					WeaponPaints.MenuApi?.NewMenuForcetype(title, MenuType.ChatMenu),
-
-				_ when menuType.Equals("console", StringComparison.CurrentCultureIgnoreCase) =>
-					WeaponPaints.MenuApi?.NewMenuForcetype(title, MenuType.ConsoleMenu),
-
-				_ => WeaponPaints.MenuApi?.NewMenu(title)
+				Title = title,
 			};
-
-			return menu;
 		}
 
 		internal static async Task CheckVersion(string version, ILogger logger)
@@ -259,21 +240,6 @@ namespace WeaponPaints
 			{
 				logger.LogError(ex, "An error occurred while checking version.");
 			}
-		}
-
-		internal static void ShowAd(string moduleVersion)
-		{
-			Console.WriteLine(" ");
-			Console.WriteLine(" _     _  _______  _______  _______  _______  __    _  _______  _______  ___   __    _  _______  _______ ");
-			Console.WriteLine("| | _ | ||       ||   _   ||       ||       ||  |  | ||       ||   _   ||   | |  |  | ||       ||       |");
-			Console.WriteLine("| || || ||    ___||  |_|  ||    _  ||   _   ||   |_| ||    _  ||  |_|  ||   | |   |_| ||_     _||  _____|");
-			Console.WriteLine("|       ||   |___ |       ||   |_| ||  | |  ||       ||   |_| ||       ||   | |       |  |   |  | |_____ ");
-			Console.WriteLine("|       ||    ___||       ||    ___||  |_|  ||  _    ||    ___||       ||   | |  _    |  |   |  |_____  |");
-			Console.WriteLine("|   _   ||   |___ |   _   ||   |    |       || | |   ||   |    |   _   ||   | | | |   |  |   |   _____| |");
-			Console.WriteLine("|__| |__||_______||__| |__||___|    |_______||_|  |__||___|    |__| |__||___| |_|  |__|  |___|  |_______|");
-			Console.WriteLine("						>> Version: " + moduleVersion);
-			Console.WriteLine("			>> GitHub: https://github.com/Nereziel/cs2-WeaponPaints");
-			Console.WriteLine(" ");
 		}
 	}
 }

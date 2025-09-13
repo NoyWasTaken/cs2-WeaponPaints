@@ -26,13 +26,13 @@ public partial class WeaponPaints : BasePlugin, IPluginConfig<WeaponPaintsConfig
 			Patch.PerformPatch("0F 85 ? ? ? ? 31 C0 B9 ? ? ? ? BA ? ? ? ? 66 0F EF C0 31 F6 31 FF 48 C7 45 ? ? ? ? ? 48 C7 45 ? ? ? ? ? 48 C7 45 ? ? ? ? ? 48 C7 45 ? ? ? ? ? 0F 29 45 ? 48 C7 45 ? ? ? ? ? C7 45 ? ? ? ? ? 66 89 45 ? E8 ? ? ? ? 41 89 C5 85 C0 0F 8E", "90 90 90 90 90 90");
 		else
 			Patch.PerformPatch("74 ? 48 8D 0D ? ? ? ? FF 15 ? ? ? ? EB ? BA", "EB");
-		
+
 		Instance = this;
 
 		if (hotReload)
 		{
 			OnMapStart(string.Empty);
-			
+
 			GPlayerWeaponsInfo.Clear();
 			GPlayersKnife.Clear();
 			GPlayersGlove.Clear();
@@ -90,7 +90,7 @@ public partial class WeaponPaints : BasePlugin, IPluginConfig<WeaponPaintsConfig
 			Unload(false);
 			return;
 		}
-		
+
 		var builder = new MySqlConnectionStringBuilder
 		{
 			Server = config.DatabaseHost,
@@ -108,7 +108,6 @@ public partial class WeaponPaints : BasePlugin, IPluginConfig<WeaponPaintsConfig
 		_localizer = Localizer;
 
 		Utility.Config = config;
-		Utility.ShowAd(ModuleVersion);
 		Task.Run(async () => await Utility.CheckVersion(ModuleVersion, Logger));
 	}
 
@@ -117,7 +116,7 @@ public partial class WeaponPaints : BasePlugin, IPluginConfig<WeaponPaintsConfig
 		try
 		{
 			MenuApi = MenuCapability.Get();
-			
+
 			if (Config.Additional.KnifeEnabled)
 				SetupKnifeMenu();
 			if (Config.Additional.SkinEnabled)
@@ -130,7 +129,7 @@ public partial class WeaponPaints : BasePlugin, IPluginConfig<WeaponPaintsConfig
 				SetupMusicMenu();
 			if (Config.Additional.PinsEnabled)
 				SetupPinsMenu();
-		
+
 			RegisterCommands();
 		}
 		catch (Exception)
