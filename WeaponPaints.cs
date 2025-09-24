@@ -115,8 +115,6 @@ public partial class WeaponPaints : BasePlugin, IPluginConfig<WeaponPaintsConfig
 	{
 		try
 		{
-			MenuApi = MenuCapability.Get();
-
 			if (Config.Additional.KnifeEnabled)
 				SetupKnifeMenu();
 			if (Config.Additional.SkinEnabled)
@@ -134,7 +132,6 @@ public partial class WeaponPaints : BasePlugin, IPluginConfig<WeaponPaintsConfig
 		}
 		catch (Exception)
 		{
-			MenuApi = null;
 			Logger.LogError("Error while loading required plugins");
 			throw;
 		}
