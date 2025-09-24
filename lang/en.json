@@ -1,4 +1,5 @@
 {
+	"menu_prefix": "[Clutch]",
 	"wp_prefix": "{red}[Clutch] {default}",
 	"wp_info_website": "Visit {green}{0}{default} where you can change skins.",
 	"wp_info_refresh": "Type {green}!wp{default} to synchronize chosen skins.",

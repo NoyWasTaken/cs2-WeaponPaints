@@ -193,10 +193,13 @@ namespace WeaponPaints
 
 		public static Menu CreateMenu(BasePlugin plugin, string title)
 		{
-			return new Menu(plugin)
+			var menu = new Menu(plugin)
 			{
-				Title = title,
+				Title = $"{plugin.Localizer["menu_prefix"]} {title}",
 			};
+
+			menu.AddSpacer();
+			return menu;
 		}
 
 		internal static async Task CheckVersion(string version, ILogger logger)
